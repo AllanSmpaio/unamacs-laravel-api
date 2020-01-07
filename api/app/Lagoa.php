@@ -19,7 +19,7 @@ class Lagoa extends Model
     }
 
     public function local() {
-        return $this->hasOne('App\Local');
+        return $this->hasMany('App\Local');
     }
 
     public function instituicao() {
