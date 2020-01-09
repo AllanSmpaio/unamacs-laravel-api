@@ -25,4 +25,8 @@ class Lagoa extends Model
     public function instituicao() {
         return $this->hasOne('App\Instituicao');
     }
+
+    public function foto() {
+        return $this->hasMany('App\Foto');
+    }
 }
