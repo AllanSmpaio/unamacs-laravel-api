@@ -52,6 +52,7 @@ class FisicoQuimicaController extends Controller
      */
     public function show($id)
     {
+        // O findOrFail() já retorna um erro se n achar o id
         return FisicoQuimica::findOrFail($id);
     }
 
@@ -64,7 +65,7 @@ class FisicoQuimicaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fis_quim = FisicoQuimica::findOrFail($id);
+        $fis_quim = FisicoQuimica::find($id);
         if ($fis_quim != null){
             $fis_quim = new FisicoQuimica();
             $fis_quim->turbidez = $request->input('turbidez');
@@ -80,6 +81,7 @@ class FisicoQuimicaController extends Controller
             $fis_quim->alcalinidade = $request->input('alcalinidade');
             $fis_quim->coleta_realizada_em = $request->input('data_coleta');
             // Verificar como pegar o id da lagoa correta
+            // No update pode ser alterada a lagoa ou apenas os outros artibutos?
             //$fis_quim->lagoa_id = ???
             $fis_quim->save();
         }

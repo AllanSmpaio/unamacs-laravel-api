@@ -14,17 +14,7 @@ class FotoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Foto::all();
     }
 
     /**
@@ -35,7 +25,12 @@ class FotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $foto = new Foto();
+        // Resolver a parada do path q eu n lembro como faz
+        $foto->caminho = $request('path');
+        // Verificar como pegar o id da lagoa correta
+        //$foto->lagoa_id = ???
+        $foto->save();
     }
 
     /**
@@ -46,18 +41,7 @@ class FotoController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $foto = Foto::findOrFail($id);
     }
 
     /**
@@ -69,7 +53,9 @@ class FotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $foto = Foto::findOrFail($id);
+        $foto->caminho = $request->input('path');
+        $foto->save();
     }
 
     /**
@@ -80,6 +66,7 @@ class FotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $foto = Foto::findOrFail($id);
+        $foto->delete();
     }
 }
