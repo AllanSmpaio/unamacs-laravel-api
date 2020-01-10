@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Instituicao;
 
 class InstituicaoController extends Controller
 {
@@ -14,17 +15,7 @@ class InstituicaoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Instituicao::all();
     }
 
     /**
@@ -35,7 +26,12 @@ class InstituicaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $instituicao = new Instituicao();
+        $instituicao->nome = $request->input('nome');
+        $instituicao->cnpj= $request->input('cnpj');
+        // Ver como pegar o ID pipipipopo
+        //$instituicao->lagoa_id = ????
+        $instituicao->save();
     }
 
     /**
@@ -46,18 +42,7 @@ class InstituicaoController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Instituicao::findOrFail($id);
     }
 
     /**
@@ -69,7 +54,10 @@ class InstituicaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $instituicao = Instituicao::findOrFail($id);
+        $instituicao->nome = $request->input('nome');
+        $instituicao->cnpj = $request->input('cnpj');
+        $instituica->save();
     }
 
     /**
@@ -80,6 +68,7 @@ class InstituicaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $instituicao = Instituicao::findOrFail($id);
+        $instituicao->delete();
     }
 }

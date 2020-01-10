@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\LagoaIntegrada;
 
 class LagoaIntegradaController extends Controller
 {
@@ -14,7 +15,7 @@ class LagoaIntegradaController extends Controller
      */
     public function index()
     {
-        //
+        return LagoaIntegrada::all();
     }
 
     /**
