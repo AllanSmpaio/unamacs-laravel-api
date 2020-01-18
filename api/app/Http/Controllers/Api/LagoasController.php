@@ -27,10 +27,9 @@ class LagoasController extends Controller
     public function store(Request $request)
     {
         $lagoa = new Lagoa();
-        $lagoa->nome = $request->input('nome');
-        $lagoa->descricao = $request->input('descricao');
+        $lagoa->nome = $request->nome;
+        $lagoa->descricao = $request->descricao;
         $lagoa->save();
-        return $lagoa->id;
     }
 
     /**
@@ -56,8 +55,8 @@ class LagoasController extends Controller
         $lagoa = Lagoa::findOrFail($id);
 
         if ($lagoa != null){
-            $lagoa->nome = $request->input('nome');
-            $lagoa->descricao = $request->input('descricao');
+            $lagoa->nome = $request->nome;
+            $lagoa->descricao = $request->descricao;
             $lagoa->save();
         }
         else{

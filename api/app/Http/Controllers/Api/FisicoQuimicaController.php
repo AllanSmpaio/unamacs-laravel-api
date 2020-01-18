@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\FisicoQuimica;
+use App\Lagoa;
 
 class FisicoQuimicaController extends Controller
 {
@@ -26,21 +27,21 @@ class FisicoQuimicaController extends Controller
      */
     public function store(Request $request)
     {
+        $lagoas = Lagoa::all();
         $fis_quim = new FisicoQuimica();
-        $fis_quim->turbidez = $request->input('turbidez');
-        $fis_quim->solidos_totais = $request->input('solidos_totais');
-        $fis_quim->condutividade = $request->input('condutividade');
-        $fis_quim->ph = $request->input('ph');
-        $fis_quim->nitrogenio = $request->input('nitrogenio');
-        $fis_quim->oxigenio = $request->input('oxigenio');
-        $fis_quim->gas_carbonico = $request->input('gas_carbonico');
-        $fis_quim->temperatura = $request->input('temperatura');
-        $fis_quim->cloretos = $request->input('cloretos');
-        $fis_quim->dureza = $request->input('dureza');
-        $fis_quim->alcalinidade = $request->input('alcalinidade');
-        $fis_quim->coleta_realizada_em = $request->input('data_coleta');
-        // Verificar como pegar o id da lagoa correta
-        //$fis_quim->lagoa_id = ???
+        $fis_quim->turbidez = $request->turbidez;
+        $fis_quim->solidos_totais = $request->solidos_totais;
+        $fis_quim->condutividade = $request->condutividade;
+        $fis_quim->ph = $request->ph;
+        $fis_quim->nitrogenio = $request->nitrogenio;
+        $fis_quim->oxigenio = $request->oxigenio;
+        $fis_quim->gas_carbonico = $request->gas_carbonico;
+        $fis_quim->temperatura = $request->temperatura;
+        $fis_quim->cloretos = $request->cloretos;
+        $fis_quim->dureza = $request->dureza;
+        $fis_quim->alcalinidade = $request->alcalinidade;
+        $fis_quim->coleta_realizada_em = $request->data_coleta;
+        $fis_quim->lagoa_id = $request->lagoa;
         $fis_quim->save();
     }
 
@@ -68,21 +69,18 @@ class FisicoQuimicaController extends Controller
         $fis_quim = FisicoQuimica::find($id);
         if ($fis_quim != null){
             $fis_quim = new FisicoQuimica();
-            $fis_quim->turbidez = $request->input('turbidez');
-            $fis_quim->solidos_totais = $request->input('solidos_totais');
-            $fis_quim->condutividade = $request->input('condutividade');
-            $fis_quim->ph = $request->input('ph');
-            $fis_quim->nitrogenio = $request->input('nitrogenio');
-            $fis_quim->oxigenio = $request->input('oxigenio');
-            $fis_quim->gas_carbonico = $request->input('gas_carbonico');
-            $fis_quim->temperatura = $request->input('temperatura');
-            $fis_quim->cloretos = $request->input('cloretos');
-            $fis_quim->dureza = $request->input('dureza');
-            $fis_quim->alcalinidade = $request->input('alcalinidade');
-            $fis_quim->coleta_realizada_em = $request->input('data_coleta');
-            // Verificar como pegar o id da lagoa correta
-            // No update pode ser alterada a lagoa ou apenas os outros artibutos?
-            //$fis_quim->lagoa_id = ???
+            $fis_quim->turbidez = $request->turbidez;
+            $fis_quim->solidos_totais = $request->solidos_totais;
+            $fis_quim->condutividade = $request->condutividade;
+            $fis_quim->ph = $request->ph;
+            $fis_quim->nitrogenio = $request->nitrogenio;
+            $fis_quim->oxigenio = $request->oxigenio;
+            $fis_quim->gas_carbonico = $request->gas_carbonico;
+            $fis_quim->temperatura = $request->temperatura;
+            $fis_quim->cloretos = $request->cloretos;
+            $fis_quim->dureza = $request->dureza;
+            $fis_quim->alcalinidade = $request->alcalinidade;
+            $fis_quim->coleta_realizada_em = $request->data_coleta;
             $fis_quim->save();
         }
         else{

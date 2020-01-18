@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Instituicao;
+use App\Lagoa;
 
 class InstituicaoController extends Controller
 {
@@ -26,11 +27,11 @@ class InstituicaoController extends Controller
      */
     public function store(Request $request)
     {
+        $lagoas = Lagoa::all();
         $instituicao = new Instituicao();
-        $instituicao->nome = $request->input('nome');
-        $instituicao->cnpj= $request->input('cnpj');
-        // Ver como pegar o ID pipipipopo
-        //$instituicao->lagoa_id = ????
+        $instituicao->nome = $request->nome;
+        $instituicao->cnpj = $request->cnpj;
+        $instituicao->lagoa_id = $request->lagoa;
         $instituicao->save();
     }
 
@@ -55,8 +56,8 @@ class InstituicaoController extends Controller
     public function update(Request $request, $id)
     {
         $instituicao = Instituicao::findOrFail($id);
-        $instituicao->nome = $request->input('nome');
-        $instituicao->cnpj = $request->input('cnpj');
+        $instituicao->nome = $request->nome;
+        $instituicao->cnpj = $request->cnpj;
         $instituica->save();
     }
 
