@@ -16,17 +16,7 @@ class LocalController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Local::all();
     }
 
     /**
@@ -37,7 +27,12 @@ class LocalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lagoas = Lagoa::all();
+        $local = new Local();
+        $local->longitude = $request->longitude;
+        $local->latitude = $request->latitude;
+        $local->lagoa_id = $request->lagoa;
+        $local->save();
     }
 
     /**
@@ -48,18 +43,7 @@ class LocalController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Local::findOrFail($id);
     }
 
     /**
@@ -71,7 +55,10 @@ class LocalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $local = Local::findOrFail($id);
+        $local->longitude = $request->longitude;
+        $local->latitude = $request->latitude;
+        $local->save();
     }
 
     /**
@@ -82,6 +69,7 @@ class LocalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $local = Local::findOrFail($id);
+        $local->delete();
     }
 }

@@ -56,8 +56,8 @@ class InstituicaoController extends Controller
     public function update(Request $request, $id)
     {
         $instituicao = Instituicao::findOrFail($id);
-        $instituicao->nome = $request->input('nome');
-        $instituicao->cnpj = $request->input('cnpj');
+        $instituicao->nome = $request->nome;
+        $instituicao->cnpj = $request->cnpj;
         $instituica->save();
     }
 
