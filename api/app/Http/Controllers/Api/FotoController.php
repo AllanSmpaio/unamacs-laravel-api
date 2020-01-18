@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Foto;
+use App\Lagoa;
 
 class FotoController extends Controller
 {
@@ -26,11 +27,11 @@ class FotoController extends Controller
      */
     public function store(Request $request)
     {
+        $lagoas = Lagoa::all();
         $foto = new Foto();
         // Resolver a parada do path q eu n lembro como faz
-        $foto->caminho = $request('path');
-        // Verificar como pegar o id da lagoa correta
-        //$foto->lagoa_id = ???
+        $foto->caminho = $request->path;
+        $foto->lagoa_id = $request->lagoa;
         $foto->save();
     }
 
