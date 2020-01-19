@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Microbiologia;
+use App\Lagoa;
 
 class MicrobiologiaController extends Controller
 {
@@ -15,17 +16,7 @@ class MicrobiologiaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Microbiologia::all();
     }
 
     /**
@@ -36,7 +27,15 @@ class MicrobiologiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lagoas = Lagoa::all();
+        $microbiologia = new Microbiologia();
+        $microbiologia->coliformes_termotolerantes = $request->coliformes_termotolerantes;
+        $microbiologia->coliformes_totais = $request->coliformes_totais;
+        $microbiologia->bacterias_aerobicas = $request->bacterias_aerobicas;
+        $microbiologia->bacterias_mesofilas = $request->bacterias_mesofilas;
+        $microbiologia->data_da_coleta = $request->data_coleta;
+        $microbiologia->lagoa_id = $request->lagoa;
+        $microbiologia->save();
     }
 
     /**
@@ -47,18 +46,8 @@ class MicrobiologiaController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $microbiologia = Microbiologia::findOrFail($id);
+        return $microbiologia;
     }
 
     /**
@@ -70,7 +59,14 @@ class MicrobiologiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $microbiologia = Microbiologia::findOrFail($id);
+        $microbiologia->coliformes_termotolerantes = $request->coliformes_termotolerantes;
+        $microbiologia->coliformes_totais = $request->coliformes_totais;
+        $microbiologia->bacterias_aerobicas = $request->bacterias_aerobicas;
+        $microbiologia->bacterias_mesofilas = $request->bacterias_mesofilas;
+        $microbiologia->data_da_coleta = $request->data_coleta;
+        $microbiologia->lagoa_id = $request->lagoa;
+        $microbiologia->save();
     }
 
     /**
@@ -81,6 +77,7 @@ class MicrobiologiaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $microbiologia = Microbiologia::findOrFail($id);
+        $microbiologia->delete();
     }
 }
