@@ -19,7 +19,7 @@ class CreateMicrobiologiasTable extends Migration
             $table->string('coliformes_totais');
             $table->string('bacterias_aerobicas');
             $table->string('bacterias_mesofilas');
-            $table->date('analise_realizada_em');
+            $table->date('data_da_coleta');
             $table->integer('lagoa_id')->unsigned();
             $table->foreign('lagoa_id')->references('id')->on('lagoas')->onDelete('cascade');
             $table->timestamps();

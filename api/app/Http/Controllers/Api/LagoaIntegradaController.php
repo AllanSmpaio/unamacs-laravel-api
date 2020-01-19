@@ -26,7 +26,7 @@ class LagoaIntegradaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $integrada = new LagoaIntegrada();
     }
 
     /**
