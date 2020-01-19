@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\LagoaIntegrada;
+use App\Lagoa;
+use App\Microbiologia;
+use App\FisicoQuimica;
+use App\Local;
 
 class LagoaIntegradaController extends Controller
 {
@@ -26,7 +30,16 @@ class LagoaIntegradaController extends Controller
      */
     public function store(Request $request)
     {
+        $lagoas = Lagoa::all();
+        $microbiologias = Microbiologia::all();
+        $fisico_quimicas = FisicoQuimica::all();
+        $locais = Local::all();
         $integrada = new LagoaIntegrada();
+        $integrada->lagoa_id = $request->lagoa;
+        $integrada->fisicoquimica_id = $request->fisicoquimica;
+        $integrada->microbiologia_id = $request->microbiologia;
+        $integrada->locais_id = $request->locals;
+        $integrada->save();
     }
 
     /**
@@ -37,12 +50,22 @@ class LagoaIntegradaController extends Controller
      */
     public function show($id)
     {
-        //
+        $integrada = LagoaIntegrada::findOrFail($id);
+        return $integrada;
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $lagoas = Lagoa::all();
+        $microbiologias = Microbiologia::all();
+        $fisico_quimicas = FisicoQuimica::all();
+        $locais = Local::all();
+        $integrada = LagoaIntegrada::findOrFail($id);
+        $integrada->lagoa_id = $request->lagoa;
+        $integrada->fisicoquimica_id = $request->fisicoquimica;
+        $integrada->microbiologia_id = $request->microbiologia;
+        $integrada->locais_id = $request->locals;
+        $integrada->save();
     }
 
     /**
@@ -53,6 +76,7 @@ class LagoaIntegradaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $integrada = LagoaIntegrada::findOrFail($id);
+        $integrada->delete();
     }
 }
